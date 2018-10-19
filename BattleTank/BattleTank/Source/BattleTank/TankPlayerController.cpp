@@ -36,8 +36,7 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	FVector HitLocation; // out parameter
 
 	if (GetSightRayHitLocation(HitLocation)) { 
-		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString());
-		// TODO tell controlled tank to aim at this point
+		GetControlledTank()->AimAt(HitLocation);
 	}
 
 
@@ -60,7 +59,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
 		// linetrace along that look direction and see what we hit (up to some max range)
 
 		if (GetLookVectorHitLocation(LookDirection, HitLocation)) {
-			UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitLocation.ToString());
+			// UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitLocation.ToString());
 		}
 
 
@@ -99,18 +98,4 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 
 	HitLocation = FVector(0.f);
 	return false; 
-
-	/*
-	bool LineTraceSingleByChannel
-	(
-		struct FHitResult & OutHit,
-		const FVector & Start,
-		const FVector & End,
-		ECollisionChannel TraceChannel,
-		const FCollisionQueryParams & Params,
-		const FCollisionResponseParams & ResponseParam
-	)
-	*/
-
-
 }
