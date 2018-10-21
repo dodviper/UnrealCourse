@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #include "TankPlayerController.h"
+#include "Tank.h"
+
 
 void ATankPlayerController::BeginPlay() {
 	Super::BeginPlay();
@@ -10,7 +11,7 @@ void ATankPlayerController::BeginPlay() {
 		UE_LOG(LogTemp, Error, TEXT("PlayerController not possessing a tank"));
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possessing: %s"), *ControlledTank->GetName());
+		//UE_LOG(LogTemp, Warning, TEXT("PlayerController possessing: %s"), *ControlledTank->GetName());
 	}
 
 
@@ -60,13 +61,14 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const {
 
 		if (GetLookVectorHitLocation(LookDirection, HitLocation)) {
 			// UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *HitLocation.ToString());
+			return true;
 		}
 
 
 
 	}
+	return false;
 	
-	return true;
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {
